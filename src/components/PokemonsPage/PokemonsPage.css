@@ -1,0 +1,13 @@
+.Sidebar {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition-property: max-width, opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+.Sidebar--open {
+    opacity: 1;
+    max-width: 30%;
+}

@@ -1,2 +1,13 @@
- 
+ .pokemon-list {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 25px;
+
+    margin: auto;
+ }
+
+ .button {
+    grid-column: 1 / 4;
+ }
  

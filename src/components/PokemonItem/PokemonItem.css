@@ -1,6 +1,25 @@
 .item {
     border: 1px solid #d3cfcf;
+    border-radius: 5px;
     width: 200px;
+
+    transition: all 0.3s ease;
+}
+
+.item:hover {
+    background-color: rgb(201, 201, 201);
+    box-shadow: 0px 0px 20px -3px rgb(75, 75, 75);
+
+    cursor: pointer;
+}
+
+.item:hover .image{
+    transform: scale(1.3);
+}
+
+.image {
+    margin: auto;
+    transition: all 0.3s ease;
 }
 
 .type {

@@ -1,33 +1,31 @@
+import React from "react";
+import { PokemonsContext } from "../../context/PokemonsContext";
 import { PokemonData } from "../../types/PokemonData";
 import { Loader } from "../Loader/Loader";
 import { PokemonItem } from "../PokemonItem/PokemonItem";
 
 import "./PokemonsList.css"
 
-interface Props {
-    data: PokemonData[];
-    loadMore: () => void;
-    loadingBtn: boolean;
-}
+export const PokemonsList: React.FC = () => {
+    const { pokemonsData, loadingBtn, handleLoadMore } = React.useContext(PokemonsContext);
 
-export const PokemonsList: React.FC<Props> = ({ data, loadMore, loadingBtn }) => {
     return (
-        <>
-            <div className="is-flex is-flex-wrap-wrap is-justify-content-space-between">
-                {data.map(pokemon => (
+        <div className="tile is-child is-flex is-flex-direction-column is-justify-content-center">
+            <div className="pokemon-list">
+                {pokemonsData.map(pokemon => (
                     <PokemonItem item={pokemon} key={pokemon.id} />
                 ))}
-            </div>
 
-            <button
-                className="mt-4 mb-2 button is-link is-fullwidth"
-                onClick={loadMore}
-            >
-                {loadingBtn 
-                    ? <Loader />
-                    : 'Load More'
-                }
-            </button>
-        </>
+                <button
+                    className="mt-4 mb-2 button is-link is-fullwidth"
+                    onClick={handleLoadMore}
+                >
+                    {loadingBtn
+                        ? <Loader />
+                        : 'Load More'
+                    }
+                </button>
+            </div>
+        </div>
     );
 };

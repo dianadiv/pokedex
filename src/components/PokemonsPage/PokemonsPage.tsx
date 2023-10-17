@@ -1,55 +1,14 @@
-import { useEffect, useState } from "react";
-import { getPokemonData, getPokemons } from "../../api/fetchPokemons";
-import { ResultData } from "../../types/ResultData";
-import { PokemonData } from "../../types/PokemonData";
+import React from "react";
 import { Loader } from "../Loader/Loader";
 import { PokemonsList } from "../PokemonsList/PokemonsList";
+import { PokemonsContext } from "../../context/PokemonsContext";
+import { PokemonDetails } from "../PokemonDetails/PokemonDetails";
+
+import cn from 'classnames';
+import './PokemonsPage.css'
 
 export const PokemonsPage: React.FC = () => {
-    const [pokemonsData, setPokemonsData] = useState<PokemonData[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [loadingBtn, setLoadingBtn] = useState(false);
-    const [hasError, setHasError] = useState(false);
-
-    const [nextLink, setNextLink] = useState('');
-
-    const getPokemonsData = async (data: ResultData[]) => {
-        try {
-            const pokemonDataPromises = data.map((item) => getPokemonData(item.url));
-            const pokemonData = await Promise.all(pokemonDataPromises);
-            setPokemonsData((prev) => [...prev, ...pokemonData]);
-            setLoading(false);
-            setLoadingBtn(false);
-        } catch (error) {
-            setHasError(true);
-            setLoading(false);
-            setLoadingBtn(false);
-        }
-    };
-
-
-    const handleLoadMore = () => {
-        setLoadingBtn(true)
-        getPokemons(nextLink)
-            .then(data => {
-                setNextLink(data.next)
-                getPokemonsData(data.results)
-            })
-    }
-
-    useEffect(() => {
-        setLoading(true);
-        getPokemons()
-            .then(data => {
-                setNextLink(data.next)
-                getPokemonsData(data.results)
-            })
-            .catch(() => {
-                setHasError(true)
-                setLoading(false);
-            });
-    }, []);
-
+    const { hasError, loading, showSidebar, selectedPokemon } = React.useContext(PokemonsContext);
 
     return (
         <>
@@ -60,20 +19,24 @@ export const PokemonsPage: React.FC = () => {
 
 
             <div className="container">
-                <div className="columns is-justify-content-center">
-                    <div className="column is-half">
-                        {!loading && !hasError && (
-                            <PokemonsList
-                                data={pokemonsData}
-                                loadMore={handleLoadMore}
-                                loadingBtn={loadingBtn}
-                            />)}
+                <div className="main-container tile is-ancestor">
+                    <div className="tile is-parent">
+                        {!loading && !hasError && <PokemonsList /> }
                     </div>
 
-                    <div className="column is-one-third">
-                        <div className="box table-container">
-                            <div>selected</div>
-                        </div>
+                    <div
+                        className={cn(
+                            'tile',
+                            'is-parent',
+                            'Sidebar',
+                            { 'Sidebar--open': showSidebar },
+                          )}
+                    >
+                        {selectedPokemon.length > 0 && (
+                            <div className="tile is-child">
+                                <PokemonDetails />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
