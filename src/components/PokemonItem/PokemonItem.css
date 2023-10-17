@@ -1,0 +1,11 @@
+.item {
+    border: 1px solid #d3cfcf;
+    width: 200px;
+}
+
+.type {
+    font-weight: bold; 
+    padding: 3px 6px;
+    border-radius: 5px;
+    background-color: rgb(215, 209, 221);
+}
