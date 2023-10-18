@@ -17,8 +17,8 @@ export const PokemonItem: React.FC<Props> = ({ item }) => {
             className="is-flex is-flex-direction-column item p-4 mb-4"
             onClick={() => handleSelect([item])}
         >
-            <img src={item.sprites.front_shiny} className="image" alt="Pokemon"></img>
-            <p className="subtitle">{capitalizeLetter(item.name)}</p>
+            <img src={item.sprites.other.dream_world.front_default} className="image" alt="Pokemon"></img>
+            <p className="title is-size-5">{capitalizeLetter(item.name)}</p>
 
             <div className="item__types is-flex is-justify-content-space-around">
                 {item.types.map(el => (

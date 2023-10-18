@@ -34,6 +34,7 @@ export const Context: React.FC<Props> = ({ children }) => {
         try {
             const pokemonDataPromises = data.map((item) => getPokemonData(item.url));
             const pokemonData = await Promise.all(pokemonDataPromises);
+            console.log(pokemonData)
             setPokemonsData((prev) => [...prev, ...pokemonData]);
             setLoading(false);
             setLoadingBtn(false);
@@ -68,6 +69,7 @@ export const Context: React.FC<Props> = ({ children }) => {
     }, []);
 
     const handleSelect = (item: PokemonData[]) => {
+        
         if (showSidebar && selectedPokemon[0].id === item[0].id) {
             setShowSidebar(false);
             return;

@@ -2,8 +2,17 @@ import { ResultData } from "./ResultData";
 
 interface Types {
   slot: number,
-  type: ResultData;
+  type: ResultData
 }
+
+interface Stat {
+  base_stat: number,
+  effort: number,
+  stat: {
+    name: string,
+  }
+}
+
 
 export interface PokemonData {
     abilities: Array<{}>;
@@ -27,8 +36,13 @@ export interface PokemonData {
       back_shiny_female: string | null;
       front_default: string;
       front_shiny: string;
+      other: {
+        dream_world: {
+          front_default: string;
+        }
+      }
     };
-    stats: Array<{}>;
+    stats: Stat[],
     types: Array<Types>;
     weight: number;
   }
