@@ -22,3 +22,14 @@ export const getPokemonData = (url: string) => {
             return response.json();
         })
 };
+
+export const getTypes = () => {
+    return fetch('https://pokeapi.co/api/v2/type')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            return response.json();
+        })
+};

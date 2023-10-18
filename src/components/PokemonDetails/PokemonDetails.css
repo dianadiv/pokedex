@@ -1,11 +1,18 @@
 .detail-item {
+    position: fixed;
+    min-width: 200px;
+
     border: 1px solid #d3cfcf;
     border-radius: 5px; 
 }
 
+.title {
+    font-size: 2em;
+}
+
 .detail-image {
-    width: 300px;
-    height: 300px;
+    height: 13em;
+    width: 13em;
     margin: 0 auto 20px;
 }
 
@@ -13,3 +20,9 @@ th {
     width: 70px;
     text-align: center !important;
 }
+
+@media (max-width: 850px) {
+    .detail-item {
+        width: 300px;
+    }
+  }

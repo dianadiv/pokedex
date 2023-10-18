@@ -1,7 +1,6 @@
 .item {
     border: 1px solid #d3cfcf;
     border-radius: 5px;
-    width: 250px;
 
     transition: all 0.3s ease;
 }
@@ -18,15 +17,23 @@
 }
 
 .image {
-    width: 200px;
-    height: 200px;
+    height: 10em;
+    width: 10em;
     margin: 0 auto 10px;
     transition: all 0.3s ease;
 }
 
 .type {
     font-weight: bold; 
+    font-size: 17px;
     padding: 3px 6px;
     border-radius: 5px;
     background-color: rgb(215, 209, 221);
 }
+
+@media (max-width: 850px) {
+    .item {
+      grid-column: span 2;
+      width: 80%;
+    }
+  }

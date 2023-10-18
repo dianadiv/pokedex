@@ -1,0 +1,15 @@
+.filter {
+    grid-column: 1 / 4;
+
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.drop-button{
+    width: 150px !important;
+}
+
+.drop-item:hover {
+    cursor: pointer;
+    background-color: rgb(233, 229, 229);
+}

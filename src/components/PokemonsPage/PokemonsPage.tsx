@@ -17,9 +17,7 @@ export const PokemonsPage: React.FC = () => {
 
             {loading && <Loader />}
 
-
-            <div className="container">
-                <div className="main-container tile is-ancestor">
+            <div className="main-container tile is-ancestor">
                     <div className="tile is-parent">
                         {!loading && !hasError && <PokemonsList /> }
                     </div>
@@ -32,14 +30,13 @@ export const PokemonsPage: React.FC = () => {
                             { 'Sidebar--open': showSidebar },
                           )}
                     >
-                        {selectedPokemon.length > 0 && (
+                        {selectedPokemon.name && (
                             <div className="tile is-child">
                                 <PokemonDetails />
                             </div>
                         )}
                     </div>
                 </div>
-            </div>
         </>
     );
 };

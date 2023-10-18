@@ -9,10 +9,13 @@ export const PokemonsContext = createContext<ContextType>({
     loading: false,
     loadingBtn: false,
     hasError: false,
-    selectedPokemon: [],
+    selectedPokemon: {} as PokemonData,
     handleLoadMore: () => {},
     handleSelect: () => {},
     showSidebar: false,
+    selectedType: '',
+    setSelectedType: () => {},
+    setShowSidebar: () => {},
 });
   
 interface Props {
@@ -27,14 +30,15 @@ export const Context: React.FC<Props> = ({ children }) => {
 
     const [showSidebar, setShowSidebar] = useState(false);
 
+    const [selectedType, setSelectedType] = useState('');
+
     const [nextLink, setNextLink] = useState<string>('');
-    const [selectedPokemon, setSelectedPokemon] = useState<PokemonData[]>([]);
+    const [selectedPokemon, setSelectedPokemon] = useState({} as PokemonData);
 
     const getPokemonsData = async (data: ResultData[]) => {
         try {
             const pokemonDataPromises = data.map((item) => getPokemonData(item.url));
             const pokemonData = await Promise.all(pokemonDataPromises);
-            console.log(pokemonData)
             setPokemonsData((prev) => [...prev, ...pokemonData]);
             setLoading(false);
             setLoadingBtn(false);
@@ -48,6 +52,7 @@ export const Context: React.FC<Props> = ({ children }) => {
 
     const handleLoadMore = () => {
         setLoadingBtn(true)
+
         getPokemons(nextLink)
             .then(data => {
                 setNextLink(data.next)
@@ -57,6 +62,7 @@ export const Context: React.FC<Props> = ({ children }) => {
 
     useEffect(() => {
         setLoading(true);
+
         getPokemons()
             .then(data => {
                 setNextLink(data.next)
@@ -68,9 +74,8 @@ export const Context: React.FC<Props> = ({ children }) => {
             });
     }, []);
 
-    const handleSelect = (item: PokemonData[]) => {
-        
-        if (showSidebar && selectedPokemon[0].id === item[0].id) {
+    const handleSelect = (item: PokemonData) => {
+        if (showSidebar && selectedPokemon?.id === item.id) {
             setShowSidebar(false);
             return;
         }
@@ -79,16 +84,29 @@ export const Context: React.FC<Props> = ({ children }) => {
         setShowSidebar(true);
     }
 
+    const preparePokemonsData = () => {
+        return selectedType.length > 0
+            ? pokemonsData.filter(el => {
+                const allTypes = el.types.map(el => el.type.name);
+                return allTypes.includes(selectedType.toLowerCase())
+            })
+            : pokemonsData
+    };
+
+    const preparedData = preparePokemonsData();
 
     const params = {
-        pokemonsData,
+        pokemonsData: preparedData,
         loading,
         loadingBtn,
         hasError,
         selectedPokemon,
         handleLoadMore, 
         handleSelect,
-        showSidebar
+        showSidebar,
+        selectedType,
+        setSelectedType,
+        setShowSidebar
     };
   
     return <PokemonsContext.Provider value={params}>{children}</PokemonsContext.Provider>;

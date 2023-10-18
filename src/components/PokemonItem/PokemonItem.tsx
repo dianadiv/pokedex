@@ -15,7 +15,7 @@ export const PokemonItem: React.FC<Props> = ({ item }) => {
     return (
         <div
             className="is-flex is-flex-direction-column item p-4 mb-4"
-            onClick={() => handleSelect([item])}
+            onClick={() => handleSelect(item)}
         >
             <img src={item.sprites.other.dream_world.front_default} className="image" alt="Pokemon"></img>
             <p className="title is-size-5">{capitalizeLetter(item.name)}</p>
