@@ -10,11 +10,10 @@ export const PokemonsList: React.FC = () => {
     const { pokemonsData, loadingBtn, handleLoadMore } = React.useContext(PokemonsContext);
 
     return (
-        <div className="tile is-child is-flex is-flex-direction-column is-justify-content-center">
+        <div className="tile is-child is-flex is-flex-direction-column is-justify-content-center is-align-content-flex-start">
+            <Filter />
 
             <div className="pokemon-list">
-                <Filter />
-
                 {pokemonsData.length > 0
                     ? (
                         pokemonsData.map(pokemon => (
@@ -24,7 +23,6 @@ export const PokemonsList: React.FC = () => {
                         <p className="subtitle is-size-4">Try loading more Pokemons or choose a different type</p>
                     )
                 }
-
                 <button
                     className="mt-4 mb-2 button is-link is-fullwidth"
                     onClick={handleLoadMore}

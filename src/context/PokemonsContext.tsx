@@ -10,18 +10,18 @@ export const PokemonsContext = createContext<ContextType>({
     loadingBtn: false,
     hasError: false,
     selectedPokemon: {} as PokemonData,
-    handleLoadMore: () => {},
-    handleSelect: () => {},
+    handleLoadMore: () => { },
+    handleSelect: () => { },
     showSidebar: false,
     selectedType: '',
-    setSelectedType: () => {},
-    setShowSidebar: () => {},
+    setSelectedType: () => { },
+    setShowSidebar: () => { },
 });
-  
+
 interface Props {
     children: JSX.Element;
 }
-  
+
 export const Context: React.FC<Props> = ({ children }) => {
     const [pokemonsData, setPokemonsData] = useState<PokemonData[]>([]);
     const [loading, setLoading] = useState(false);
@@ -29,7 +29,6 @@ export const Context: React.FC<Props> = ({ children }) => {
     const [hasError, setHasError] = useState(false);
 
     const [showSidebar, setShowSidebar] = useState(false);
-
     const [selectedType, setSelectedType] = useState('');
 
     const [nextLink, setNextLink] = useState<string>('');
@@ -101,13 +100,13 @@ export const Context: React.FC<Props> = ({ children }) => {
         loadingBtn,
         hasError,
         selectedPokemon,
-        handleLoadMore, 
+        handleLoadMore,
         handleSelect,
         showSidebar,
         selectedType,
         setSelectedType,
-        setShowSidebar
+        setShowSidebar,
     };
-  
+
     return <PokemonsContext.Provider value={params}>{children}</PokemonsContext.Provider>;
 };

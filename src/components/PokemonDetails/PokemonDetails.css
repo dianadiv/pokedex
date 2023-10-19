@@ -1,9 +1,11 @@
 .detail-item {
     position: fixed;
-    min-width: 200px;
+    min-width: 250px;
+
+    top: 30%;
 
     border: 1px solid #d3cfcf;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 .title {
@@ -21,8 +23,8 @@ th {
     text-align: center !important;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 770px) {
     .detail-item {
-        width: 300px;
+        background-color: #fff;
     }
-  }
+}

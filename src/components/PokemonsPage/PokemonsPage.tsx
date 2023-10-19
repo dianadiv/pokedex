@@ -6,10 +6,10 @@ import { PokemonDetails } from "../PokemonDetails/PokemonDetails";
 
 import cn from 'classnames';
 import './PokemonsPage.css'
+import { Modal } from "../Modal/Modal";
 
 export const PokemonsPage: React.FC = () => {
     const { hasError, loading, showSidebar, selectedPokemon } = React.useContext(PokemonsContext);
-
     return (
         <>
             <h1 className="title is-1">Pokedex</h1>
@@ -17,9 +17,10 @@ export const PokemonsPage: React.FC = () => {
 
             {loading && <Loader />}
 
-            <div className="main-container tile is-ancestor">
+            <div className="page-container">
+                <div className="tile is-ancestor page-tile">
                     <div className="tile is-parent">
-                        {!loading && !hasError && <PokemonsList /> }
+                        {!loading && !hasError && <PokemonsList />}
                     </div>
 
                     <div
@@ -28,7 +29,7 @@ export const PokemonsPage: React.FC = () => {
                             'is-parent',
                             'Sidebar',
                             { 'Sidebar--open': showSidebar },
-                          )}
+                        )}
                     >
                         {selectedPokemon.name && (
                             <div className="tile is-child">
@@ -36,7 +37,10 @@ export const PokemonsPage: React.FC = () => {
                             </div>
                         )}
                     </div>
+
+                    {selectedPokemon.name && <Modal />}
                 </div>
+            </div>
         </>
     );
 };

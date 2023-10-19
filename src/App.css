@@ -2,6 +2,7 @@
   text-align: center;
   padding: 20px 10px;
   font-size: 18px;
+  margin: auto;
 }
 
 @media (max-width: 1200px) {
