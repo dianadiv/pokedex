@@ -26,6 +26,7 @@ export const PokemonsList: React.FC = () => {
                 <button
                     className="mt-4 mb-2 button is-link is-fullwidth"
                     onClick={handleLoadMore}
+                    disabled={loadingBtn}
                 >
                     {loadingBtn
                         ? <Loader />
